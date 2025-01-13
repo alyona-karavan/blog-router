@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { TArticle } from '../types/types';
 
 const API_URL = 'https://blog-platform.kata.academy/api';
 
-export const fetchArticles = async (page = 1) => {
+export const fetchArticles = async (page = 1): Promise<TArticle[]> => {
   try {
     const response = await axios.get(`${API_URL}/articles`, {
       params: {
@@ -12,17 +13,15 @@ export const fetchArticles = async (page = 1) => {
     });
     return response.data.articles;
   } catch (error) {
-    console.error('Error fetching articles:', error);
-    throw error;
+    throw new Error('Error fetching articles');
   }
 };
 
-export const fetchArticleBySlug = async (slug) => {
+export const fetchArticleBySlug = async (slug: string): Promise<TArticle> => {
   try {
     const response = await axios.get(`${API_URL}/articles/${slug}`);
-    return response.data.articles;
+    return response.data.article;
   } catch (error) {
-    console.error('Error fetching article:', error);
-    throw error;
+    throw new Error('Error fetching article');
   }
 };

@@ -1,50 +1,53 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import { fetchArticleBySlug } from "../../services/api/articles";
 import styles from "./Article.module.scss";
 import { TArticle } from "../../services/types/types";
 
-type ArticleProps = {
-  article: TArticle[];
-};
-
-const Article: FC<ArticleProps> = ({ article }) => {
+const Article = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentArticle, setCurrentArticle] = useState<TArticle>(article);
-  const params = useParams();
+  const [currentArticle, setCurrentArticle] = useState<TArticle | null>(null);
+  const { slug } = useParams();
 
   useEffect(() => {
     const loadArticle = async () => {
+      if (!slug) {
+        setError("Slug is undefined");
+        return;
+      }
       try {
         setLoading(true);
-        if (!article) {
-          const slug = params.slug;
-          const data = await fetchArticleBySlug(slug);
-          if (data) {
-            setCurrentArticle(data);
-          } else {
-            setError("Article not found");
-          }
+        const data = await fetchArticleBySlug(slug);
+        if (data) {
+          setCurrentArticle(data);
         } else {
-          setCurrentArticle(article);
+          setError("Article not found");
         }
-      } catch (err) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadArticle();
-  }, [article, params.slug]);
+  }, [slug]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  
 
   return (
-    <section className={styles.article}>
+    <section>
+      {currentArticle && (
+        <div className={styles.container}>
+        <div className={styles.article}>
       <div className={styles.leftSide}>
         <div className={styles.titleLikes}>
           <p className={styles.title}>{currentArticle.title}</p>
@@ -53,7 +56,6 @@ const Article: FC<ArticleProps> = ({ article }) => {
             src="/assets/img/heart.svg"
             alt="like"
           />
-          {/* TODO: !!!!!!! */}
           {currentArticle.favoritesCount !== 0 && (
             <p className={styles.countLikes}>{currentArticle.favoritesCount}</p>
           )}
@@ -67,7 +69,6 @@ const Article: FC<ArticleProps> = ({ article }) => {
             ))}
           </p>
         )}
-        {/* /!!!/ */}
         <p className={styles.description}>{currentArticle.description}</p>
       </div>
 
@@ -98,8 +99,10 @@ const Article: FC<ArticleProps> = ({ article }) => {
           className={styles.photo}
         />
       </div>
-
-      {/* <ReactMarkdown>{currentArticle.body}</ReactMarkdown> */}
+          </div>
+      <ReactMarkdown className={styles.body}>{currentArticle.body}</ReactMarkdown>
+      </div>
+    )}
     </section>
   );
 };
