@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchArticles } from "../../services/api/articles";
 import styles from "./Articles.module.scss";
+import { TArticle } from "../../services/types/types";
+// import { Routes, Route } from "react-router-dom";
 // import Article from '../Article';
 
 const Articles = () => {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<TArticle[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -15,15 +17,17 @@ const Articles = () => {
       try {
         setLoading(true);
         const data = await fetchArticles(currentPage);
-        //TODO remove
-        console.log("API Response (Article):", data);
         if (data && Array.isArray(data)) {
           setArticles(data);
         } else {
           setError("No articles found or invalid data format");
         }
-      } catch (err) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
@@ -51,26 +55,27 @@ const Articles = () => {
                   {article.title}
                   {/* <Article article={article} /> */}
                 </Link>
+                {/* <Routes>
+                <Route path="/articles/:slug" element={<Article />} />
+                </Routes> */}
                 <img
                   className={styles.heart}
                   src="/assets/img/heart.svg"
                   alt="like"
                 />
-                {/* !!!!!!! */}
                 {article.favoritesCount !== 0 && (
                   <p className={styles.countLikes}>{article.favoritesCount}</p>
                 )}
               </div>
               {article.tagList && article.tagList.length > 0 && (
                 <p className={styles.tagList}>
-                  {article.tagList.map((tag, index) => (
+                  {article.tagList.map((tag: string, index: number) => (
                     <span key={index} className={styles.tag}>
                       {tag}
                     </span>
                   ))}
                 </p>
               )}
-              {/* /!!!/ */}
               <p className={styles.description}>{article.description}</p>
             </div>
 
@@ -121,6 +126,7 @@ const Articles = () => {
           Next
         </button>
       </div>
+     
     </section>
   );
 };

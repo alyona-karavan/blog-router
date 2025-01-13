@@ -1,14 +1,16 @@
+import React from "react";
 import styles from "./App.module.scss";
 import Articles from "../Articles";
+import Article from "../Article";
 import SignIn from "../SignIn";
 import SignUp from "../SignUp";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import React from "react";
+
 
 const App = () => {
   return (
     <Router>
-      // TODO вышести в отдельный компонент
+      {/* TODO: вышести в отдельный компонент */}
       <header className={styles.header}>
         <Link to="/">Realworld Blog</Link>
         <nav>
@@ -23,17 +25,16 @@ const App = () => {
                 Sign Up
               </Link>
             </li>
-            <Routes>
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-            </Routes>
           </ul>
         </nav>
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Articles />} />
-          <Route path="/articles" element={<Articles />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<Articles />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:slug" element={<Article />} />
         </Routes>
       </main>
     </Router>
