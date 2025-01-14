@@ -5,13 +5,13 @@ import Articles from '../Articles'
 import Article from '../Article'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
+// Import any new components related to conflict resolution here
 
 import styles from './App.module.scss'
 
 const App: FC = () => {
   return (
     <Router>
-      {/* TODO: вышести в отдельный компонент */}
       <header className={styles.header}>
         <Link to="/">Realworld Blog</Link>
         <nav>
@@ -26,6 +26,7 @@ const App: FC = () => {
                 Sign Up
               </Link>
             </li>
+            {/* Add new links for conflict resolution components here */}
           </ul>
         </nav>
       </header>
@@ -36,6 +37,7 @@ const App: FC = () => {
           <Route path="/" element={<Articles />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:slug" element={<Article />} />
+          {/* Add new routes for conflict resolution components here */}
         </Routes>
       </main>
     </Router>

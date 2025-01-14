@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import ReactMarkdown from 'react-markdown';
-import { fetchArticleBySlug } from "../../services/api/articles";
-import styles from "./Article.module.scss";
-import { TArticle } from "../../services/types/types";
-import Loading from "../Loading";
-import ErrorComponent from "../ErrorComponent";
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
+
+import Loading from '../Loading'
+import ErrorComponent from '../ErrorComponent'
+
+import { fetchArticleBySlug } from '../../services/api/articles'
+import { TArticle } from '../../services/types/types'
+
+import styles from './Article.module.scss'
 
 const Article = () => {
   const [loading, setLoading] = useState(true)
@@ -41,9 +44,8 @@ const Article = () => {
     loadArticle()
   }, [slug])
 
-  if (loading) return <Loading />;
-  if (error) return <ErrorComponent />;
-  
+  if (loading) return <Loading />
+  if (error) return <ErrorComponent />
 
   return (
     <section>

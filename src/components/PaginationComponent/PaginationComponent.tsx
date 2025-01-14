@@ -1,21 +1,17 @@
-import { FC } from 'react';
-import { Pagination } from 'antd';
+import { FC } from 'react'
+import { Pagination } from 'antd'
 
-import styles from './PaginationComponent.module.scss';
+import styles from './PaginationComponent.module.scss'
 
-type PaginationProps  = {
-  current: number; // Change from defaultCurrent to current
-  total: number;
-  onChange: (page: number) => void;
+type PaginationProps = {
+  current: number // Change from defaultCurrent to current
+  total: number
+  onChange: (page: number) => void
 }
 
-const PaginationComponent: FC<PaginationProps> = ({
-  current,
-  total,
-  onChange,
-}) => {
-  const pageSize = 5; // Set the number of pages to display
-  const totalPages = Math.ceil(total / pageSize); // Calculate total pages
+const PaginationComponent: FC<PaginationProps> = ({ current, total, onChange }) => {
+  const pageSize = 5 // Set the number of pages to display
+  const totalPages = Math.ceil(total / pageSize) // Calculate total pages
 
   return (
     <Pagination
@@ -28,7 +24,7 @@ const PaginationComponent: FC<PaginationProps> = ({
       pageSize={pageSize}
       hideOnSinglePage={true}
     />
-  );
-};
+  )
+}
 
-export default PaginationComponent;
+export default PaginationComponent
