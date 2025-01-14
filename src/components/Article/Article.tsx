@@ -1,51 +1,51 @@
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
-import Loading from '../Loading'
-import ErrorComponent from '../ErrorComponent'
+import Loading from '../Loading';
+import ErrorComponent from '../ErrorComponent';
 
-import { fetchArticleBySlug } from '../../services/api/articles'
-import { TArticle } from '../../services/types/types'
+import { fetchArticleBySlug } from '../../services/api/articles';
+import { TArticle } from '../../services/types/types';
 
-import styles from './Article.module.scss'
+import styles from './Article.module.scss';
 
 const Article = () => {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [currentArticle, setCurrentArticle] = useState<TArticle | null>(null)
-  const { slug } = useParams()
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentArticle, setCurrentArticle] = useState<TArticle | null>(null);
+  const { slug } = useParams();
 
   useEffect(() => {
     const loadArticle = async () => {
       if (!slug) {
-        setError('Slug is undefined')
-        return
+        setError('Slug is undefined');
+        return;
       }
       try {
-        setLoading(true)
-        const data = await fetchArticleBySlug(slug)
+        setLoading(true);
+        const data = await fetchArticleBySlug(slug);
         if (data) {
-          setCurrentArticle(data)
+          setCurrentArticle(data);
         } else {
-          setError('Article not found')
+          setError('Article not found');
         }
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message)
+          setError(err.message);
         } else {
-          setError('An unknown error occurred')
+          setError('An unknown error occurred');
         }
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadArticle()
-  }, [slug])
+    loadArticle();
+  }, [slug]);
 
-  if (loading) return <Loading />
-  if (error) return <ErrorComponent />
+  if (loading) return <Loading />;
+  if (error) return <ErrorComponent />;
 
   return (
     <section>
@@ -100,7 +100,7 @@ const Article = () => {
         </div>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default Article
+export default Article;

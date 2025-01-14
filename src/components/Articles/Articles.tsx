@@ -1,50 +1,50 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import { fetchArticles } from '../../services/api/articles'
-import { TArticle } from '../../services/types/types'
+import { fetchArticles } from '../../services/api/articles';
+import { TArticle } from '../../services/types/types';
 
-import styles from './Articles.module.scss'
+import styles from './Articles.module.scss';
 
-import PaginationComponent from '../PaginationComponent'
-import Loading from '../Loading'
-import ErrorComponent from '../ErrorComponent'
+import PaginationComponent from '../PaginationComponent';
+import Loading from '../Loading';
+import ErrorComponent from '../ErrorComponent';
 
 const Articles = () => {
-  const [articles, setArticles] = useState<TArticle[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [total, setTotal] = useState(0)
+  const [articles, setArticles] = useState<TArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const loadArticles = async () => {
       try {
-        setLoading(true)
-        const { articles, articlesCount } = await fetchArticles(currentPage)
+        setLoading(true);
+        const { articles, articlesCount } = await fetchArticles(currentPage);
         if (articles && Array.isArray(articles)) {
-          setArticles(articles)
-          setTotal(articlesCount)
+          setArticles(articles);
+          setTotal(articlesCount);
         } else {
-          setError('No articles found or invalid data format')
+          setError('No articles found or invalid data format');
         }
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message)
+          setError(err.message);
         } else {
-          setError('An unknown error occurred')
+          setError('An unknown error occurred');
         }
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadArticles()
-  }, [currentPage])
+    loadArticles();
+  }, [currentPage]);
 
-  if (loading) return <Loading />
-  if (error) return <ErrorComponent />
-  if (!articles || articles.length === 0) return <div>No articles found</div>
+  if (loading) return <Loading />;
+  if (error) return <ErrorComponent />;
+  if (!articles || articles.length === 0) return <div>No articles found</div>;
 
   return (
     <>
@@ -102,7 +102,7 @@ const Articles = () => {
       </section>
       <PaginationComponent current={currentPage} total={total} onChange={(page) => setCurrentPage(page)} />
     </>
-  )
-}
+  );
+};
 
-export default Articles
+export default Articles;
