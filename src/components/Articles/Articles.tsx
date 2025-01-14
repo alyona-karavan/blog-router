@@ -3,20 +3,25 @@ import { Link } from "react-router-dom";
 import { fetchArticles } from "../../services/api/articles";
 import styles from "./Articles.module.scss";
 import { TArticle } from "../../services/types/types";
+import PaginationComponent from "../PaginationComponent";
+import Loading from "../Loading";
+import ErrorComponent from "../ErrorComponent";
 
 const Articles = () => {
   const [articles, setArticles] = useState<TArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0); 
 
   useEffect(() => {
     const loadArticles = async () => {
       try {
         setLoading(true);
-        const data = await fetchArticles(currentPage);
-        if (data && Array.isArray(data)) {
-          setArticles(data);
+        const { articles, articlesCount } = await fetchArticles(currentPage); 
+        if (articles && Array.isArray(articles)) {
+          setArticles(articles);
+          setTotal(articlesCount); 
         } else {
           setError("No articles found or invalid data format");
         }
@@ -34,15 +39,16 @@ const Articles = () => {
     loadArticles();
   }, [currentPage]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <Loading />;
+  if (error) return <ErrorComponent />;
   if (!articles || articles.length === 0) return <div>No articles found</div>;
 
   return (
+    <>
     <section className={styles.articles}>
       {articles && articles.length > 0 ? (
         articles.map((article) => (
-          <section className={styles.article}>
+          <section className={styles.article} key={article.slug}>
             <div className={styles.leftSide}>
               <div className={styles.titleLikes}>
                 <Link
@@ -105,23 +111,13 @@ const Articles = () => {
       ) : (
         <div>No articles found</div>
       )}
-      <div className={styles.pagination}>
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>Page {currentPage}</span>
-        <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          disabled={articles && articles.length < 10}
-        >
-          Next
-        </button>
-      </div>
-     
     </section>
+    <PaginationComponent
+      current={currentPage} 
+      total={total} 
+      onChange={(page) => setCurrentPage(page)}
+    />
+    </>
   );
 };
 

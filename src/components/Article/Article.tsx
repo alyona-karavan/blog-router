@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import { fetchArticleBySlug } from "../../services/api/articles";
 import styles from "./Article.module.scss";
 import { TArticle } from "../../services/types/types";
+import Loading from "../Loading";
+import ErrorComponent from "../ErrorComponent";
 
 const Article = () => {
   const [loading, setLoading] = useState(true);
@@ -39,8 +41,8 @@ const Article = () => {
     loadArticle();
   }, [slug]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <Loading />;
+  if (error) return <ErrorComponent />;
   
 
   return (
