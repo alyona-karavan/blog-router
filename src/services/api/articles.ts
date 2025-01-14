@@ -1,7 +1,8 @@
-import axios from 'axios';
-import { TArticle } from '../types/types';
+import axios from 'axios'
 
-const API_URL = 'https://blog-platform.kata.academy/api';
+import { TArticle } from '../types/types'
+
+const API_URL = 'https://blog-platform.kata.academy/api'
 
 export const fetchArticles = async (page = 1): Promise<{ articles: TArticle[], articlesCount: number }> => {
     const response = await axios.get(`${API_URL}/articles`, {

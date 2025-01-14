@@ -1,1 +1,1 @@
-export const getUser = () => {};
+// export const getUser = () => {}

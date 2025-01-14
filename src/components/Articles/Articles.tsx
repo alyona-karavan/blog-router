@@ -23,21 +23,21 @@ const Articles = () => {
           setArticles(articles);
           setTotal(articlesCount); 
         } else {
-          setError("No articles found or invalid data format");
+          setError('No articles found or invalid data format')
         }
       } catch (err: unknown) {
         if (err instanceof Error) {
-          setError(err.message);
+          setError(err.message)
         } else {
-          setError("An unknown error occurred");
+          setError('An unknown error occurred')
         }
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    loadArticles();
-  }, [currentPage]);
+    loadArticles()
+  }, [currentPage])
 
   if (loading) return <Loading />;
   if (error) return <ErrorComponent />;
@@ -51,21 +51,11 @@ const Articles = () => {
           <section className={styles.article} key={article.slug}>
             <div className={styles.leftSide}>
               <div className={styles.titleLikes}>
-                <Link
-                  to={`/articles/${article.slug}`}
-                  key={article.slug}
-                  className={styles.title}
-                >
+                <Link to={`/articles/${article.slug}`} key={article.slug} className={styles.title}>
                   {article.title}
                 </Link>
-                <img
-                  className={styles.heart}
-                  src="/assets/img/heart.svg"
-                  alt="like"
-                />
-                {article.favoritesCount !== 0 && (
-                  <p className={styles.countLikes}>{article.favoritesCount}</p>
-                )}
+                <img className={styles.heart} src="/assets/img/heart.svg" alt="like" />
+                {article.favoritesCount !== 0 && <p className={styles.countLikes}>{article.favoritesCount}</p>}
               </div>
               {article.tagList && article.tagList.length > 0 && (
                 <p className={styles.tagList}>
@@ -78,33 +68,28 @@ const Articles = () => {
               )}
               <p className={styles.description}>{article.description}</p>
             </div>
-
             <div className={styles.rightSide}>
               <div className={styles.containerForAuthorDate}>
                 <p className={styles.author}>{article.author.username}</p>
                 {article.updatedAt ? (
                   <p className={styles.date}>
-                    {new Date(article.updatedAt).toLocaleString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                    {new Date(article.updatedAt).toLocaleString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </p>
                 ) : (
                   <p className={styles.date}>
-                    {new Date(article.createdAt).toLocaleString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
+                    {new Date(article.createdAt).toLocaleString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </p>
                 )}
               </div>
-              <img
-                src={article.author.image}
-                alt="Profile"
-                className={styles.photo}
-              />
+              <img src={article.author.image} alt="Profile" className={styles.photo} />
             </div>
           </section>
         ))
@@ -121,4 +106,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default Articles
