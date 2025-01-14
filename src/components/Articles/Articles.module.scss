@@ -1,97 +1,96 @@
 .articles {
-    & .article {
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        margin: 26px auto 20px auto;
-        padding: 20px;
-    
-        display: flex;
-        justify-content: space-between;
-        height: 140px;
-        max-width: 938px;
-    
-        & .leftSide{
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-    
-            &  .titleLikes{
-            display: flex;
-            align-items: center;
+  & .article {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin: 26px auto 20px auto;
+    padding: 20px;
 
-            & .title {
-                color: #1890FF;
-                font-size: 20px;
-                line-height: 28px;
-                margin-right: 13px;
-                }
-        
-            & .heart{
-            opacity: 0.75;
-            margin-right: 3px;
-            width: 16px;
-            height: 14px;
-            }
-    
-            & .countLikes{
-                font-size: 12px;
-                line-height: 22px;
-                color: #000000;
-                opacity: 0.75;
-            }
-        }
-    
-        & .tagList{
-            display: flex;
-    
-            & .tag{
-                margin-right: 8px;
-                border: solid 1px #000000;
-                opacity: 0.5;
-                border-radius: 2px;
-                font-size: 12px;
-                line-height: auto;
-                padding: 2px 5px 3px 5px;
-            }
-        }
-    
-        & .description{
-            font-size: 12px;
-            line-height: 22px;
-            color: #000000;
-            opacity: 0.75;
-        }
-     }
-    
-     & .rightSide{
+    display: flex;
+    justify-content: space-between;
+    height: 140px;
+    max-width: 938px;
+
+    & .leftSide {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      & .titleLikes {
         display: flex;
-        gap: 12px;
-    
-        & .containerForAuthorDate {
-     
-            & .author{
-                font-size: 18px;
-                line-height: 28px;
-                color: #000000;
-                opacity: 0.85;
-            }
-        
-            & .date{
-                font-size: 12px;
-                line-height: 22px;
-                color: #000000;
-                opacity: 0.5;
-            }
+        align-items: center;
+
+        & .title {
+          color: #1890ff;
+          font-size: 20px;
+          line-height: 28px;
+          margin-right: 13px;
         }
-    
-        & .photo{
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            object-fit: cover;
+
+        & .heart {
+          opacity: 0.75;
+          margin-right: 3px;
+          width: 16px;
+          height: 14px;
         }
-    }  
+
+        & .countLikes {
+          font-size: 12px;
+          line-height: 22px;
+          color: #000000;
+          opacity: 0.75;
+        }
+      }
+
+      & .tagList {
+        display: flex;
+
+        & .tag {
+          margin-right: 8px;
+          border: solid 1px #000000;
+          opacity: 0.5;
+          border-radius: 2px;
+          font-size: 12px;
+          line-height: auto;
+          padding: 2px 5px 3px 5px;
+        }
+      }
+
+      & .description {
+        font-size: 12px;
+        line-height: 22px;
+        color: #000000;
+        opacity: 0.75;
+      }
     }
+
+    & .rightSide {
+      display: flex;
+      gap: 12px;
+
+      & .containerForAuthorDate {
+        & .author {
+          font-size: 18px;
+          line-height: 28px;
+          color: #000000;
+          opacity: 0.85;
+        }
+
+        & .date {
+          font-size: 12px;
+          line-height: 22px;
+          color: #000000;
+          opacity: 0.5;
+        }
+      }
+
+      & .photo {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
 }

@@ -1,13 +1,14 @@
-import React from "react";
-import styles from "./App.module.scss";
-import Articles from "../Articles";
-import Article from "../Article";
-import SignIn from "../SignIn";
-import SignUp from "../SignUp";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { FC } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
+import Articles from '../Articles'
+import Article from '../Article'
+import SignIn from '../SignIn'
+import SignUp from '../SignUp'
 
-const App = () => {
+import styles from './App.module.scss'
+
+const App: FC = () => {
   return (
     <Router>
       {/* TODO: вышести в отдельный компонент */}
@@ -30,15 +31,15 @@ const App = () => {
       </header>
       <main>
         <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<Articles />} />
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/articles/:slug" element={<Article />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Articles />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:slug" element={<Article />} />
         </Routes>
       </main>
     </Router>
-  );
-};
+  )
+}
 
-export default App;
+export default App
