@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { fetchArticles } from "../../services/api/articles";
 import styles from "./Articles.module.scss";
 import { TArticle } from "../../services/types/types";
-// import { Routes, Route } from "react-router-dom";
-// import Article from '../Article';
 
 const Articles = () => {
   const [articles, setArticles] = useState<TArticle[]>([]);
@@ -53,11 +51,7 @@ const Articles = () => {
                   className={styles.title}
                 >
                   {article.title}
-                  {/* <Article article={article} /> */}
                 </Link>
-                {/* <Routes>
-                <Route path="/articles/:slug" element={<Article />} />
-                </Routes> */}
                 <img
                   className={styles.heart}
                   src="/assets/img/heart.svg"
@@ -69,7 +63,7 @@ const Articles = () => {
               </div>
               {article.tagList && article.tagList.length > 0 && (
                 <p className={styles.tagList}>
-                  {article.tagList.map((tag: string, index: number) => (
+                  {article.tagList.map((tag, index) => (
                     <span key={index} className={styles.tag}>
                       {tag}
                     </span>
