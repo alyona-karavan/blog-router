@@ -1,6 +1,7 @@
 import styles from './SignUp.module.scss'
+import {FC} from 'react'
 
-const SignUp = () => {
+const SignUp: FC = () => {
     return (
         <div className={styles.container}></div>
     )
