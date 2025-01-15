@@ -4,21 +4,20 @@ import { Pagination } from 'antd'
 import styles from './PaginationComponent.module.scss'
 
 type PaginationProps = {
-  current: number // Change from defaultCurrent to current
+  current: number
   total: number
   onChange: (page: number) => void
 }
 
 const PaginationComponent: FC<PaginationProps> = ({ current, total, onChange }) => {
-  const pageSize = 5 // Set the number of pages to display
-  const totalPages = Math.ceil(total / pageSize) // Calculate total pages
-
+  const pageSize = 5
+  const totalPages = Math.ceil(total / pageSize)
   return (
     <Pagination
       className={styles.pagination}
       align="center"
-      current={current} // Use current instead of defaultCurrent
-      total={totalPages * pageSize} // Set total to the total number of articles
+      current={current}
+      total={totalPages * pageSize}
       onChange={onChange}
       showSizeChanger={false}
       pageSize={pageSize}
