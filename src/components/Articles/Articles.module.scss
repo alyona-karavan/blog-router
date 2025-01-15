@@ -17,7 +17,7 @@
       flex-direction: column;
       gap: 4px;
       width: 50%;
-      overflow: hidden; // Added overflow handling
+      overflow: hidden;
 
       & .titleLikes {
         display: flex;
@@ -28,12 +28,12 @@
           font-size: 20px;
           line-height: 28px;
           margin-right: 13px;
-          overflow: hidden; // Added overflow handling
-          text-overflow: ellipsis; // Added text overflow handling
-          white-space: nowrap; // Prevent text wrapping
-          max-width: 100%; // Ensure it does not exceed container
-          opacity: 1; // Full opacity
-          transition: opacity 0.5s; // Smooth transition for opacity
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 100%;
+          opacity: 1;
+          transition: opacity 0.5s;
         }
 
         & .heart {
@@ -62,11 +62,11 @@
           font-size: 12px;
           line-height: auto;
           padding: 2px 5px 3px 5px;
-          overflow: hidden; // Added overflow handling
-          text-overflow: ellipsis; // Added text overflow handling
-          white-space: nowrap; // Prevent text wrapping
-          opacity: 1; // Full opacity
-          transition: opacity 0.5s; // Smooth transition for opacity
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          opacity: 1;
+          transition: opacity 0.5s;
         }
       }
 
@@ -75,12 +75,12 @@
         line-height: 22px;
         color: #000000;
         opacity: 0.75;
-        overflow: hidden; // Added overflow handling
-        text-overflow: ellipsis; // Added text overflow handling
-        white-space: nowrap; // Prevent text wrapping
-        max-width: 100%; // Ensure it does not exceed container
-        opacity: 1; // Full opacity
-        transition: opacity 0.5s; // Smooth transition for opacity
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        opacity: 1;
+        transition: opacity 0.5s;
       }
     }
 

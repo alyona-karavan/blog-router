@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-import { TArticle } from '../types/types'
+import { TArticle, ArticlesResponse } from '../types/types'
 
 const API_URL = 'https://blog-platform.kata.academy/api'
 
-export const fetchArticles = async (page = 1): Promise<{ articles: TArticle[]; articlesCount: number }> => {
-  const response = await axios.get(`${API_URL}/articles`, {
+export const fetchArticles = async (page = 1): Promise<ArticlesResponse> => {
+  const response = await axios.get(`${API_URL}/articles?page=${page}`, {
     params: {
       limit: 5,
       offset: (page - 1) * 5,
@@ -13,7 +13,7 @@ export const fetchArticles = async (page = 1): Promise<{ articles: TArticle[]; a
   })
   return {
     articles: response.data.articles,
-    articlesCount: response.data.articlesCount, // Use articlesCount from the response
+    articlesCount: response.data.articlesCount,
   }
 }
 

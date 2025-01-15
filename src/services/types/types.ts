@@ -14,3 +14,8 @@ export type TArticle = {
     following: boolean
   }
 }
+
+export type ArticlesResponse = {
+  articles: TArticle[]
+  articlesCount: number
+}

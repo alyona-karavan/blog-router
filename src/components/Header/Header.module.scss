@@ -1,0 +1,40 @@
+$white-color: #ffffff;
+$black-color: #000000;
+$green-color: #52c41a;
+
+.header {
+  background-color: $white-color;
+  color: $black-color;
+  font-size: 18px;
+  line-height: 28px;
+
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 22px 0 22px;
+
+  & .ulHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    & .signIn {
+      padding: 6px 25px 10px 0;
+      background-color: $white-color;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    & .signUp {
+      color: $green-color;
+      border: solid 1px $green-color;
+      border-radius: 5px;
+      padding: 6px 18px 10px 18px;
+      background-color: $white-color;
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+}
