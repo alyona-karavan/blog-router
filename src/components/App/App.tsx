@@ -11,7 +11,6 @@ import styles from './App.module.scss'
 const App: FC = () => {
   return (
     <Router>
-      {/* TODO: вышести в отдельный компонент */}
       <header className={styles.header}>
         <Link to="/">Realworld Blog</Link>
         <nav>
