@@ -13,7 +13,10 @@ const Articles = () => {
   const [articles, setArticles] = useState<TArticle[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage')
+    return savedPage ? Number(savedPage) : 1
+  })
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
@@ -39,6 +42,10 @@ const Articles = () => {
     }
 
     loadArticles()
+  }, [currentPage])
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage.toString())
   }, [currentPage])
 
   if (loading) return <Loading />
