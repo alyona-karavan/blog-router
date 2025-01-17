@@ -1,0 +1,123 @@
+$white-color: #fff;
+$black-color: #000;
+$grey-color: #e5e5ea;
+$grey-02-color: #8c8c8c;
+$light-grey-color: #e8e8e8;
+$dark-grey-color: #595959;
+$title-color: #262626;
+$input-color: #bfbfbf;
+$blue-color: #1890ff;
+$red-color: #F5222D;
+
+.container {
+  width: 384px;
+  min-height: 599px;
+  background-color: $white-color;
+  border: 1px solid $grey-color;
+  border-radius: 6px;
+  box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 32px;
+  margin: 59px auto;
+
+  & .title {
+    color: $title-color;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  & .form {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    justify-content: space-between;
+
+    & .errorSpan{
+        margin-top: 2px;
+        color: $red-color;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    & .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-weight: 400;
+
+      & .inputGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        & .label {
+          font-size: 14px;
+          line-height: 22px;
+        }
+
+        & .input {
+          font-size: 16px;
+          line-height: 24px;
+          color: $black-color;
+          opacity: 0.75;
+          border: 1px solid $grey-color;
+          border-radius: 4px;
+          padding: 8px 12px;
+        }
+
+        & .inputError{
+          border: 1px solid $red-color;
+        }
+      }
+    }
+    & .checkboxContainer{
+        display: flex;
+        flex-direction: column;
+
+        & .checkboxGroup {
+        display: flex;
+        border-top: 1px solid $light-grey-color;
+        padding-top: 8px;
+
+            & .checkbox {
+                width: 16px;
+                height: 16px;
+                margin: 3px 8px 0 0;
+                color: $blue-color;
+            }
+            
+            & .label {
+                font-size: 14px;
+                line-height: 22px;
+                color: $dark-grey-color;
+            }
+        }
+    }
+    & .button {
+      background-color: $blue-color;
+      color: $white-color;
+      border-radius: 4px;
+      padding: 8px 16px;
+
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  & .alreadyHaveAccount {
+    text-align: center;
+    color: $grey-02-color;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 8px;
+
+    & .link {
+      color: $blue-color;
+    }
+  }
+}

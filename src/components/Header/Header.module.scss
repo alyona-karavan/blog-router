@@ -20,6 +20,30 @@ $green-color: #52c41a;
     align-items: center;
     flex-wrap: nowrap;
 
+    & .createArticle{
+      font-size: 14px;
+      line-height: 22px;
+      color: $green-color;
+      border: 1px solid $green-color;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-right: 27px;
+    }
+
+    & .profile{
+      margin-right: 27px;
+    }
+
+    & .logOut{
+      color: $black-color;
+      border: solid 1px $black-color;
+      border-radius: 5px;
+      padding: 6px 18px 10px 18px;
+      background-color: $white-color;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
     & .signIn {
       padding: 6px 25px 10px 0;
       background-color: $white-color;
