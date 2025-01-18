@@ -20,7 +20,7 @@ $green-color: #52c41a;
     align-items: center;
     flex-wrap: nowrap;
 
-    & .createArticle{
+    & .createArticle {
       font-size: 14px;
       line-height: 22px;
       color: $green-color;
@@ -30,11 +30,31 @@ $green-color: #52c41a;
       margin-right: 27px;
     }
 
-    & .profile{
+    & .profile {
       margin-right: 27px;
+
+      & .profileLink {
+        display: flex;
+        align-items: center;
+
+        & .username {
+          font-size: 18px;
+          line-height: 28px;
+          color: $black-color;
+          opacity: 0.85;
+          margin-right: 13px;
+        }
+
+        & .photo {
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
     }
 
-    & .logOut{
+    & .logOut {
       color: $black-color;
       border: solid 1px $black-color;
       border-radius: 5px;
