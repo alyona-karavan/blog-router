@@ -1,14 +1,16 @@
 import { FC, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { login } from '../../store/userSlice'
 import { loginUser } from '../../services/api/user'
 import ErrorComponent from '../ErrorComponent'
-import { SignInForm, TokenProps } from '../../services/types/types'
+import { SignInForm } from '../../services/types/types'
 
 import styles from './SignIn.module.scss'
 
-const SignIn: FC<TokenProps> = ({ login }) => {
+const SignIn: FC = () => {
   const [error, setError] = useState<string | null>(null)
   const {
     register,
@@ -17,6 +19,7 @@ const SignIn: FC<TokenProps> = ({ login }) => {
   } = useForm<SignInForm>()
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onSubmit = async (data: SignInForm) => {
     const userData = {
@@ -27,8 +30,10 @@ const SignIn: FC<TokenProps> = ({ login }) => {
     }
     try {
       const response = await loginUser(userData)
-      login(response.user.token)
-      navigate('/')
+      if (response.user) {
+        dispatch(login(response.user))
+        navigate('/')
+      }
     } catch (err) {
       setError('Invalid credentials')
     }

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { updateCurrentUser } from '../../services/api/user'
-import useAuth from '../../hooks/useAuth'
-import { EditProfile } from '../../services/types/types'
+import { EditProfile, UserData } from '../../services/types/types'
+import { fetchUserData } from '../../store/userSlice'
 import ErrorComponent from '../ErrorComponent'
+import { AppDispatch } from '../../store'
 import styles from '../SignIn/SignIn.module.scss'
 
 const Profile = () => {
@@ -17,7 +19,8 @@ const Profile = () => {
     formState: { errors },
   } = useForm<EditProfile>()
 
-  const { user, fetchUserData } = useAuth()
+  const dispatch = useDispatch<AppDispatch>()
+  const user = useSelector((state: UserData) => state.user.user)
 
   useEffect(() => {
     if (user) {
@@ -40,14 +43,13 @@ const Profile = () => {
       },
     }
 
-    console.log('Submitting user data:', userData)
-
     try {
       const response = await updateCurrentUser(userData)
-      console.log('Edited successful:', response)
-      await fetchUserData()
-      console.log('fetchUserData вызван после обновления профиля')
-      navigate('/')
+      if (response.user) {
+        console.log('Edited successful:', response)
+        dispatch(fetchUserData())
+        navigate('/')
+      }
     } catch (err) {
       if (err instanceof Error) {
         if ('status' in err && err.status === 500) {

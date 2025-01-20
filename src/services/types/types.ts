@@ -46,10 +46,10 @@ export type SignInData = {
 }
 
 export type EditProfile = {
-  username: string
+  username?: string
   email: string
-  bio: string
-  image: string | null
+  bio?: string
+  image?: string | null
 }
 
 export type EditProfileData = {
@@ -64,12 +64,11 @@ export type User = {
   image: string | null
 }
 
-export type TokenProps = {
-  login: (token: string) => void
+export type UserSlice = {
+  isAuthenticated: boolean
+  user: User | null
 }
 
-export type HeaderProps = {
-  isAuthenticated: boolean
-  logout: () => void
-  user: User | null
+export type UserData = {
+  user: UserSlice
 }
