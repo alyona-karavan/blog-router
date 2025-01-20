@@ -1,13 +1,5 @@
-$white-color: #fff;
-$black-color: #000;
-$grey-color: #e5e5ea;
-$grey-02-color: #8c8c8c;
-$light-grey-color: #e8e8e8;
-$dark-grey-color: #595959;
-$title-color: #262626;
-$input-color: #bfbfbf;
-$blue-color: #1890ff;
-$red-color: #F5222D;
+@import '../../colors.scss';
+@import '../../fonts.scss';
 
 .container {
   width: 384px;
@@ -24,46 +16,42 @@ $red-color: #F5222D;
   padding: 48px 32px;
   margin: 59px auto;
 
-  & .title {
+  .title {
     color: $title-color;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 28px;
+    @extend %p20;
     margin-bottom: 21px;
   }
 
-  & .form {
+  .form {
     display: flex;
     flex-direction: column;
     gap: 21px;
     justify-content: space-between;
     width: 100%;
 
-    & .errorSpan{
-        margin-top: 2px;
-        color: $red-color;
-        font-size: 14px;
-        line-height: 22px;
+    .errorSpan {
+      margin-top: 2px;
+      color: $red-color;
+      @extend %p14;
     }
 
-    & .inputsContainer {
+    .inputsContainer {
       display: flex;
       flex-direction: column;
       gap: 12px;
       font-weight: 400;
 
-      & .inputGroup {
+      .inputGroup {
         display: flex;
         flex-direction: column;
         gap: 2px;
-        & .label {
-          font-size: 14px;
-          line-height: 22px;
+        .label {
+          @extend %p14;
         }
 
-        & .input {
-          font-size: 16px;
-          line-height: 24px;
+        .input {
+          @extend %p16;
           color: $black-color;
           opacity: 0.75;
           border: 1px solid $grey-color;
@@ -71,53 +59,51 @@ $red-color: #F5222D;
           padding: 8px 12px;
         }
 
-        & .inputError{
+        .inputError {
           border: 1px solid $red-color;
         }
       }
     }
-    & .checkboxContainer{
-        display: flex;
-        flex-direction: column;
+    .checkboxContainer {
+      display: flex;
+      flex-direction: column;
 
-        & .checkboxGroup {
+      .checkboxGroup {
         display: flex;
         border-top: 1px solid $light-grey-color;
         padding-top: 8px;
 
-            & .checkbox {
-                width: 16px;
-                height: 16px;
-                margin: 3px 8px 0 0;
-                color: $blue-color;
-            }
-            
-            & .label {
-                font-size: 14px;
-                line-height: 22px;
-                color: $dark-grey-color;
-            }
+        .checkbox {
+          width: 16px;
+          height: 16px;
+          margin: 3px 8px 0 0;
+          color: $blue-color;
         }
+
+        .label {
+          @extend %p14;
+          color: $dark-grey-color;
+        }
+      }
     }
-    & .button {
+    .button {
       background-color: $blue-color;
       color: $white-color;
       border-radius: 4px;
       padding: 8px 16px;
 
-      font-size: 16px;
-      line-height: 24px;
+      @extend %p16;
     }
   }
 
-  & .alreadyHaveAccount {
+  .alreadyHaveAccount {
     text-align: center;
     color: $grey-02-color;
     font-size: 12px;
     line-height: 20px;
     margin-top: 8px;
 
-    & .link {
+    .link {
       color: $blue-color;
     }
   }

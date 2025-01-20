@@ -1,11 +1,19 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { HeaderProps } from '../../services/types/types'
+import { logout } from '../../store/userSlice'
+import { UserData } from '../../services/types/types'
 
 import styles from './Header.module.scss'
 
-const Header: FC<HeaderProps> = ({ isAuthenticated, logout }) => {
+const Header: FC = () => {
+  const user = useSelector((state: UserData) => state.user.user)
+  const isAuthenticated = useSelector((state: UserData) => state.user.isAuthenticated)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   return (
     <header className={styles.header}>
       <Link to="/">Realworld Blog</Link>
@@ -18,13 +26,16 @@ const Header: FC<HeaderProps> = ({ isAuthenticated, logout }) => {
                   Create article
                 </Link>
               </li>
-              <li>
-                <Link to="/" className={styles.profile}>
-                  Profile
+              <li className={styles.profile}>
+                <Link to="/profile" className={styles.profileLink}>
+                  <span className={styles.username}>
+                    {user?.username && user.username.length > 10 ? `${user.username.slice(0, 10)}...` : user?.username}
+                  </span>
+                  {user?.image && <img src={user.image} alt="User Photo" className={styles.photo} />}
                 </Link>
               </li>
               <li>
-                <button onClick={logout} className={styles.logOut}>
+                <button onClick={() => dispatch(logout(), navigate('/'))} className={styles.logOut}>
                   Log Out
                 </button>
               </li>

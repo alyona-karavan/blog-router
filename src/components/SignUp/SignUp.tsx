@@ -1,15 +1,18 @@
 import { FC, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-import { SignUpForm, TokenProps } from '../../services/types/types'
+import { login } from '../../store/userSlice'
+import { SignUpForm } from '../../services/types/types'
 import { registerUser } from '../../services/api/user'
 import ErrorComponent from '../ErrorComponent'
 
 import styles from './SignUp.module.scss'
 
-const SignUp: FC<TokenProps> = ({ login }) => {
+const SignUp: FC = () => {
   const [error, setError] = useState<string | null>(null)
+  const dispatch = useDispatch()
 
   const {
     register,
@@ -33,7 +36,7 @@ const SignUp: FC<TokenProps> = ({ login }) => {
       const response = await registerUser(userData)
       console.log('Registration successful:', response)
       if (response.user.token) {
-        login(response.user.token)
+        dispatch(login(response.user))
       } else {
         console.error('Token not found in response:', response)
       }

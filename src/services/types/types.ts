@@ -28,24 +28,47 @@ export type SignUpForm = {
   agreement: boolean
 }
 
-export type SignInForm = {
-  email: string
-  password: string
-}
-
-export type UserData = {
+export type SignUpData = {
   user: {
-    username?: string
+    username: string
     email: string
     password: string
   }
 }
 
-export type TokenProps = {
-  login: (token: string) => void
+export type SignInForm = {
+  email: string
+  password: string
 }
 
-export type HeaderProps = {
+export type SignInData = {
+  user: SignInForm
+}
+
+export type EditProfile = {
+  username?: string
+  email: string
+  bio?: string
+  image?: string | null
+}
+
+export type EditProfileData = {
+  user: EditProfile
+}
+
+export type User = {
+  email: string
+  token: string
+  username: string
+  bio: string
+  image: string | null
+}
+
+export type UserSlice = {
   isAuthenticated: boolean
-  logout: () => void
+  user: User | null
+}
+
+export type UserData = {
+  user: UserSlice
 }

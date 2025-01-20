@@ -1,25 +1,26 @@
+@import '../../colors.scss';
+
 .pagination {
   padding-bottom: 17px;
 
-  // Use :global to target Ant Design classes directly
   :global {
     .ant-pagination-item {
       background-color: transparent;
 
       &:hover {
-        background-color: #e6f7ff;
+        background-color: $background-color;
       }
 
       &-active {
-        background-color: #1890ff;
+        background-color: $blue-color;
         border: none;
         &:hover {
           background-color: transparent;
-          border: 1px solid #1890ff;
+          border: 1px solid $blue-color;
         }
 
         & a {
-          color: white;
+          color: $white-color;
         }
       }
     }

@@ -1,56 +1,57 @@
+@import '../../colors.scss';
+@import '../../fonts.scss';
+
 .container {
   max-width: 938px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: $white-color;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   margin: 26px auto 20px auto;
   padding: 20px;
 
-  & .article {
+   .article {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
 
-    & .leftSide {
+    .leftSide {
       display: flex;
       flex-direction: column;
       gap: 4px;
 
-      & .titleLikes {
+      .titleLikes {
         display: flex;
         align-items: center;
 
-        & .title {
-          color: #1890ff;
-          font-size: 20px;
-          line-height: 28px;
+        .title {
+          color: $blue-color;
+          @extend %p20;
           margin-right: 13px;
         }
 
-        & .heart {
+        .heart {
           opacity: 0.75;
           margin-right: 3px;
           width: 16px;
           height: 14px;
         }
 
-        & .countLikes {
-          font-size: 12px;
-          line-height: 22px;
-          color: #000000;
+        .countLikes {
+          @extend %p12;
+          color: $black-color;
           opacity: 0.75;
         }
       }
 
-      & .tagList {
+      .tagList {
         display: flex;
 
-        & .tag {
+        .tag {
           margin-right: 8px;
-          border: solid 1px #000000;
+          border: solid 1px $black-color;
           opacity: 0.5;
           border-radius: 2px;
           font-size: 12px;
@@ -59,35 +60,32 @@
         }
       }
 
-      & .description {
-        font-size: 12px;
-        line-height: 22px;
-        color: #000000;
+      .description {
+        @extend %p12;
+        color: $black-color;
         opacity: 0.5;
       }
     }
 
-    & .rightSide {
+    .rightSide {
       display: flex;
       gap: 12px;
 
-      & .containerForAuthorDate {
-        & .author {
-          font-size: 18px;
-          line-height: 28px;
-          color: #000000;
+      .containerForAuthorDate {
+        .author {
+          @extend %p18;
+          color: $black-color;
           opacity: 0.85;
         }
 
-        & .date {
-          font-size: 12px;
-          line-height: 22px;
-          color: #000000;
+        .date {
+          @extend %p12;
+          color: $black-color;
           opacity: 0.5;
         }
       }
 
-      & .photo {
+      .photo {
         width: 46px;
         height: 46px;
         border-radius: 50%;
@@ -95,7 +93,7 @@
       }
     }
   }
-  & .body {
-    color: #000000;
+  .body {
+    color: $black-color;
   }
 }
