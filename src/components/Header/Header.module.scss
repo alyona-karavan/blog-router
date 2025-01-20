@@ -1,12 +1,10 @@
-$white-color: #ffffff;
-$black-color: #000000;
-$green-color: #52c41a;
+@import '../../colors.scss';
+@import '../../fonts.scss';
 
 .header {
   background-color: $white-color;
   color: $black-color;
-  font-size: 18px;
-  line-height: 28px;
+  @extend %p18;
 
   height: 80px;
   display: flex;
@@ -14,15 +12,14 @@ $green-color: #52c41a;
   align-items: center;
   padding: 9px 22px 0 22px;
 
-  & .ulHeader {
+  .ulHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
 
-    & .createArticle {
-      font-size: 14px;
-      line-height: 22px;
+    .createArticle {
+      @extend %p14;
       color: $green-color;
       border: 1px solid $green-color;
       border-radius: 5px;
@@ -30,22 +27,21 @@ $green-color: #52c41a;
       margin-right: 27px;
     }
 
-    & .profile {
+    .profile {
       margin-right: 27px;
 
-      & .profileLink {
+      .profileLink {
         display: flex;
         align-items: center;
 
-        & .username {
-          font-size: 18px;
-          line-height: 28px;
+        .username {
+          @extend %p18;
           color: $black-color;
           opacity: 0.85;
           margin-right: 13px;
         }
 
-        & .photo {
+        .photo {
           width: 46px;
           height: 46px;
           border-radius: 50%;
@@ -54,32 +50,29 @@ $green-color: #52c41a;
       }
     }
 
-    & .logOut {
+    .logOut {
       color: $black-color;
       border: solid 1px $black-color;
       border-radius: 5px;
       padding: 6px 18px 10px 18px;
       background-color: $white-color;
-      font-size: 18px;
-      line-height: 28px;
+      @extend %p18;
     }
 
-    & .signIn {
+    .signIn {
       padding: 6px 6px 10px 0;
       margin-right: 19px;
       background-color: $white-color;
-      font-size: 18px;
-      line-height: 28px;
+      @extend %p18;
     }
 
-    & .signUp {
+    .signUp {
       color: $green-color;
       border: solid 1px $green-color;
       border-radius: 5px;
       padding: 6px 18px 10px 18px;
       background-color: $white-color;
-      font-size: 18px;
-      line-height: 28px;
+      @extend %p18;
     }
   }
 }
