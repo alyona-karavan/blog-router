@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { TArticle, ArticlesResponse } from '../types/types'
+import { TArticle, ArticlesResponse, CreateArticleData } from '../types/types'
 
 const API_URL = 'https://blog-platform.kata.academy/api'
 
@@ -20,4 +20,15 @@ export const fetchArticles = async (page = 1): Promise<ArticlesResponse> => {
 export const fetchArticleBySlug = async (slug: string): Promise<TArticle> => {
   const response = await axios.get(`${API_URL}/articles/${slug}`)
   return response.data.article
+}
+
+export const CreateAnArticle = async (articleData: CreateArticleData) => {
+  const token = localStorage.getItem('token')
+  const response = await axios.post(`${API_URL}/articles`, articleData, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
+    },
+  })
+  return response.data
 }

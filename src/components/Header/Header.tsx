@@ -22,7 +22,7 @@ const Header: FC = () => {
           {isAuthenticated ? (
             <>
               <li>
-                <Link to="/" className={styles.createArticle}>
+                <Link to="/new-article" className={styles.createArticle}>
                   Create article
                 </Link>
               </li>

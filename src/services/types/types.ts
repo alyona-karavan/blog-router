@@ -72,3 +72,14 @@ export type UserSlice = {
 export type UserData = {
   user: UserSlice
 }
+
+export type CreateArticle = {
+  title: string
+  description: string
+  body: string
+  tagList?: string[]
+}
+
+export type CreateArticleData = {
+  article: CreateArticle
+}
