@@ -58,47 +58,46 @@
           border: 1px solid $grey-color;
           border-radius: 4px;
           padding: 8px 12px;
-
         }
 
-        .tag{
-            width: 300px;
-            height: 40px;
+        .tag {
+          width: 300px;
+          height: 40px;
 
-            & input{
-              width: 100%;
-              height: 100%;
-            }
-        }
-
-        .text{
-            min-height: 168px;
+          & input {
+            width: 100%;
+            height: 100%;
           }
-        
-        .tagLine{
-            display: flex;
-            gap: 17px;
+        }
+
+        .text {
+          min-height: 168px;
+        }
+
+        .tagLine {
+          display: flex;
+          gap: 17px;
         }
 
         .inputError {
           border: 1px solid $red-color;
         }
 
-        .button{
-            @extend %p16;
-            padding: 8px 36px;
-            border-radius: 4px;
-            background-color: transparent;
+        .button {
+          @extend %p16;
+          padding: 8px 36px;
+          border-radius: 4px;
+          background-color: transparent;
         }
 
-        .delete{
-            border: 1px solid $red-color;
-            color: $red-color;
+        .delete {
+          border: 1px solid $red-color;
+          color: $red-color;
         }
 
-        .add{
-            border: 1px solid $blue-color;
-            color: $blue-color;
+        .add {
+          border: 1px solid $blue-color;
+          color: $blue-color;
         }
       }
     }
