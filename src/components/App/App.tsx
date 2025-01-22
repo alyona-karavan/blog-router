@@ -8,6 +8,7 @@ import Articles from '../Articles'
 import Article from '../Article'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
+import NewArticle from '../NewArticle'
 import Profile from '../Profile'
 import NotFound from '../NotFound'
 import Error500 from '../Error500/Error500'
@@ -27,6 +28,7 @@ const App: FC = () => {
         <Route path="/" element={<Articles />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/new-article" element={<NewArticle />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:slug" element={<Article />} />

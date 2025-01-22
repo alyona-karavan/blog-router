@@ -15,12 +15,12 @@ export type TArticle = {
   }
 }
 
-export type ArticlesResponse = {
+export type TArticlesResponse = {
   articles: TArticle[]
   articlesCount: number
 }
 
-export type SignUpForm = {
+export type TSignUpForm = {
   username: string
   email: string
   password: string
@@ -28,7 +28,7 @@ export type SignUpForm = {
   agreement: boolean
 }
 
-export type SignUpData = {
+export type TSignUpData = {
   user: {
     username: string
     email: string
@@ -36,27 +36,27 @@ export type SignUpData = {
   }
 }
 
-export type SignInForm = {
+export type TSignInForm = {
   email: string
   password: string
 }
 
-export type SignInData = {
-  user: SignInForm
+export type TSignInData = {
+  user: TSignInForm
 }
 
-export type EditProfile = {
+export type TEditProfile = {
   username?: string
   email: string
   bio?: string
   image?: string | null
 }
 
-export type EditProfileData = {
-  user: EditProfile
+export type TEditProfileData = {
+  user: TEditProfile
 }
 
-export type User = {
+export type TUser = {
   email: string
   token: string
   username: string
@@ -64,11 +64,22 @@ export type User = {
   image: string | null
 }
 
-export type UserSlice = {
+export type TUserSlice = {
   isAuthenticated: boolean
-  user: User | null
+  user: TUser | null
 }
 
-export type UserData = {
-  user: UserSlice
+export type TUserData = {
+  user: TUserSlice
+}
+
+export type TPostArticle = {
+  title: string
+  description: string
+  body: string
+  tagList?: string[]
+}
+
+export type TPostArticleData = {
+  article: TPostArticle
 }
