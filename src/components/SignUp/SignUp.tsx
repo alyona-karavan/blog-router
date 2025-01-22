@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { login } from '../../store/userSlice'
-import { SignUpForm } from '../../services/types/types'
+import { TSignUpForm } from '../../services/types/types'
 import { registerUser } from '../../services/api/user'
 import ErrorComponent from '../ErrorComponent'
 
@@ -19,11 +19,11 @@ const SignUp: FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<SignUpForm>()
+  } = useForm<TSignUpForm>()
 
   const navigate = useNavigate()
 
-  const onSubmit = async (data: SignUpForm) => {
+  const onSubmit = async (data: TSignUpForm) => {
     const userData = {
       user: {
         username: data.username,

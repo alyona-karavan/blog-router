@@ -2,9 +2,9 @@ import { useState, FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { CreateArticle } from '../../services/types/types'
+import { TPostArticle } from '../../services/types/types'
 import ErrorComponent from '../ErrorComponent'
-import { CreateAnArticle } from '../../services/api/articles'
+import { postArticle } from '../../services/api/articles'
 
 import styles from './NewArticle.module.scss'
 
@@ -13,7 +13,7 @@ const NewArticle: FC = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<CreateArticle>()
+  } = useForm<TPostArticle>()
 
   const [tags, setTags] = useState<string[]>([''])
   const filteredTags = tags.filter((tag) => tag !== '')
@@ -22,7 +22,7 @@ const NewArticle: FC = () => {
 
   const navigate = useNavigate()
 
-  const onSubmit = async (data: CreateArticle) => {
+  const onSubmit = async (data: TPostArticle) => {
     const articleData = {
       article: {
         title: data.title,
@@ -32,7 +32,7 @@ const NewArticle: FC = () => {
       },
     }
     try {
-      const response = await CreateAnArticle(articleData)
+      const response = await postArticle(articleData)
       if (response.article) {
         navigate('/')
       }

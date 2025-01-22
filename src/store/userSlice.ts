@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import { getCurrentUser } from '../services/api/user'
-import { UserSlice } from '../services/types/types'
+import { TUserSlice } from '../services/types/types'
 
-const initialState: UserSlice = {
+const initialState: TUserSlice = {
   isAuthenticated: false,
   user: null,
 }

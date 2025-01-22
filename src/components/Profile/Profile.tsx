@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { updateCurrentUser } from '../../services/api/user'
-import { EditProfile, UserData } from '../../services/types/types'
+import { TEditProfile, TUserData } from '../../services/types/types'
 import { fetchUserData } from '../../store/userSlice'
 import ErrorComponent from '../ErrorComponent'
 import { AppDispatch } from '../../store'
@@ -17,10 +17,10 @@ const Profile = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<EditProfile>()
+  } = useForm<TEditProfile>()
 
   const dispatch = useDispatch<AppDispatch>()
-  const user = useSelector((state: UserData) => state.user.user)
+  const user = useSelector((state: TUserData) => state.user.user)
 
   useEffect(() => {
     if (user) {
@@ -33,7 +33,7 @@ const Profile = () => {
 
   const navigate = useNavigate()
 
-  const onSubmit = async (data: EditProfile) => {
+  const onSubmit = async (data: TEditProfile) => {
     const userData = {
       user: {
         username: data.username,

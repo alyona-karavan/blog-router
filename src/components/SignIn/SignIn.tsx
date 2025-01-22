@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../store/userSlice'
 import { loginUser } from '../../services/api/user'
 import ErrorComponent from '../ErrorComponent'
-import { SignInForm } from '../../services/types/types'
+import { TSignInForm } from '../../services/types/types'
 
 import styles from './SignIn.module.scss'
 
@@ -16,12 +16,12 @@ const SignIn: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInForm>()
+  } = useForm<TSignInForm>()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const onSubmit = async (data: SignInForm) => {
+  const onSubmit = async (data: TSignInForm) => {
     const userData = {
       user: {
         email: data.email,
