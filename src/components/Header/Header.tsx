@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { logout } from '../../store/userSlice'
-import { UserData } from '../../services/types/types'
+import { TUserData } from '../../services/types/types'
 
 import styles from './Header.module.scss'
 
 const Header: FC = () => {
-  const user = useSelector((state: UserData) => state.user.user)
-  const isAuthenticated = useSelector((state: UserData) => state.user.isAuthenticated)
+  const user = useSelector((state: TUserData) => state.user.user)
+  const isAuthenticated = useSelector((state: TUserData) => state.user.isAuthenticated)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
