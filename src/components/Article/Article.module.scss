@@ -12,7 +12,7 @@
   margin: 26px auto 20px auto;
   padding: 20px;
 
-   .article {
+  .article {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
@@ -90,6 +90,30 @@
         height: 46px;
         border-radius: 50%;
         object-fit: cover;
+      }
+    }
+    .buttons{
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+
+      
+      .button{
+        @extend %p14;
+        border-radius: 5px;
+        padding: 6px 17px 5px 17px;
+        background-color: transparent;
+      }
+
+      .delete{
+        color: $red-color;
+        border: 1px solid $red-color;
+      }
+
+      .edit{
+        color: $green-color;
+        border: 1px solid $green-color;
+        padding: 6px 19px 5px 19px;
       }
     }
   }

@@ -20,6 +20,17 @@ export type TArticlesResponse = {
   articlesCount: number
 }
 
+export type TArticlePutData = {
+  title: string
+  description: string
+  body: string
+  tagList: string[]
+}
+
+export type TArticlePut = {
+  article: TArticlePutData
+}
+
 export type TSignUpForm = {
   username: string
   email: string
