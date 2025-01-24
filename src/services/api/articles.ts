@@ -5,10 +5,16 @@ import { TArticle, TArticlesResponse, TPostArticleData, TArticlePut } from '../t
 const API_URL = 'https://blog-platform.kata.academy/api'
 
 export const fetchArticles = async (page = 1): Promise<TArticlesResponse> => {
+  const token = localStorage.getItem('token')
+
   const response = await axios.get(`${API_URL}/articles?page=${page}`, {
     params: {
       limit: 5,
       offset: (page - 1) * 5,
+    },
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
     },
   })
   return {
@@ -18,7 +24,14 @@ export const fetchArticles = async (page = 1): Promise<TArticlesResponse> => {
 }
 
 export const fetchArticleBySlug = async (slug: string): Promise<TArticle> => {
-  const response = await axios.get(`${API_URL}/articles/${slug}`)
+  const token = localStorage.getItem('token')
+
+  const response = await axios.get(`${API_URL}/articles/${slug}`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
+    },
+  })
   return response.data.article
 }
 

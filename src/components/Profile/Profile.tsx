@@ -46,14 +46,12 @@ const Profile = () => {
     try {
       const response = await updateCurrentUser(userData)
       if (response.user) {
-        console.log('Edited successful:', response)
         dispatch(fetchUserData())
         navigate('/')
       }
     } catch (err) {
       if (err instanceof Error) {
         if ('status' in err && err.status === 500) {
-          console.log('Server error occurred:', err)
           setError('Server error, please try again later.')
           navigate('/error500')
         } else {

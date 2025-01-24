@@ -1,13 +1,16 @@
 /* eslint-disable indent */
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 
 import Loading from '../Loading'
 import ErrorComponent from '../ErrorComponent'
 import { fetchArticleBySlug } from '../../services/api/articles'
-import { TArticle, TUserData } from '../../services/types/types'
+import { TArticle, TUserData, TStateLikeSlice } from '../../services/types/types'
+import { postLike, deleteLike } from '../../services/api/like'
+import { AppDispatch } from '../../store'
+import { fetchCurrentArticle, setCurrentArticle } from '../../store/likeSlice'
 
 import styles from './Article.module.scss'
 
@@ -16,8 +19,9 @@ const Article = () => {
   const [error, setError] = useState<string | null>(null)
   const isAuthenticated = useSelector((state: TUserData) => state.user.isAuthenticated)
   const user = useSelector((state: TUserData) => state.user.user)
-  const [currentArticle, setCurrentArticle] = useState<TArticle | null>(null)
+  const currentArticle = useSelector((state: TStateLikeSlice) => state.articles.currentArticle)
   const { slug } = useParams()
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
     const loadArticle = async () => {
@@ -29,11 +33,7 @@ const Article = () => {
       try {
         setLoading(true)
         const data = await fetchArticleBySlug(slug)
-        if (data) {
-          setCurrentArticle(data)
-        } else {
-          setError('Article not found')
-        }
+        dispatch(setCurrentArticle(data))
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(`Error fetching article: ${err.message}`)
@@ -46,7 +46,25 @@ const Article = () => {
     }
 
     loadArticle()
-  }, [slug])
+  }, [slug, dispatch])
+
+  const handleLikeClick = async (currentArticle: TArticle) => {
+    if (isAuthenticated) {
+      try {
+        if (currentArticle.favorited) {
+          const response = await deleteLike(currentArticle.slug)
+          if (response.article) {
+            dispatch(fetchCurrentArticle(currentArticle.slug))
+          }
+        } else {
+          await postLike(currentArticle.slug)
+          dispatch(fetchCurrentArticle(currentArticle.slug))
+        }
+      } catch (err) {
+        setError('Invalid credentials')
+      }
+    }
+  }
 
   if (loading) return <Loading />
   if (error) return <ErrorComponent />
@@ -59,7 +77,14 @@ const Article = () => {
             <div className={styles.leftSide}>
               <div className={styles.titleLikes}>
                 <p className={styles.title}>{currentArticle.title}</p>
-                <img className={styles.heart} src="/assets/img/heart.svg" alt="like" />
+                <img
+                  className={styles.heart}
+                  src={
+                    currentArticle.favorited && isAuthenticated ? '/assets/img/heart-red.svg' : '/assets/img/heart.svg'
+                  }
+                  alt="like"
+                  onClick={() => handleLikeClick(currentArticle)}
+                />
                 {currentArticle.favoritesCount !== 0 && (
                   <p className={styles.countLikes}>{currentArticle.favoritesCount}</p>
                 )}

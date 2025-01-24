@@ -6,6 +6,7 @@ export type TArticle = {
   tagList: string[]
   createdAt: string
   updatedAt: string
+  favorited: boolean
   favoritesCount: number
   author: {
     username: string
@@ -29,6 +30,10 @@ export type TArticlePutData = {
 
 export type TArticlePut = {
   article: TArticlePutData
+}
+
+export type TLike = {
+  article: TArticle
 }
 
 export type TSignUpForm = {
@@ -80,8 +85,31 @@ export type TUserSlice = {
   user: TUser | null
 }
 
+export type TlikeSlice = {
+  articles: TArticle[] | undefined
+}
+
+export type TInitialLikeSlice = {
+  articles: TArticle[]
+  articlesCount: number
+  currentPage: number
+  currentArticle: TArticle | null
+}
+
+export type TStateLikeSlice = {
+  articles: TInitialLikeSlice
+}
+
+export type TReduxLike = {
+  articles: TArticlesResponse
+}
+
 export type TUserData = {
   user: TUserSlice
+}
+
+export type TLikeData = {
+  articles: TlikeSlice
 }
 
 export type TPostArticle = {
