@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchArticles } from '../../services/api/articles'
-import { TArticle } from '../../services/types/types'
+import { TUserData, TStateLikeSlice, TArticle } from '../../services/types/types'
+import { setArticles, fetchUserLike, setCurrentPage } from '../../store/likeSlice'
+import { postLike, deleteLike } from '../../services/api/like'
+import { AppDispatch } from '../../store'
 import PaginationComponent from '../PaginationComponent'
 import Loading from '../Loading'
 import ErrorComponent from '../ErrorComponent'
@@ -10,26 +14,20 @@ import ErrorComponent from '../ErrorComponent'
 import styles from './Articles.module.scss'
 
 const Articles = () => {
-  const [articles, setArticles] = useState<TArticle[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [currentPage, setCurrentPage] = useState(() => {
-    const savedPage = localStorage.getItem('currentPage')
-    return savedPage ? Number(savedPage) : 1
-  })
-  const [total, setTotal] = useState(0)
+  const dispatch = useDispatch<AppDispatch>()
+  const isAuthenticated = useSelector((state: TUserData) => state.user.isAuthenticated)
+  const articles = useSelector((state: TStateLikeSlice) => state.articles.articles)
+  const total = useSelector((state: TStateLikeSlice) => state.articles.articlesCount)
+  const currentPage = useSelector((state: TStateLikeSlice) => state.articles.currentPage)
 
   useEffect(() => {
     const loadArticles = async () => {
       try {
         setLoading(true)
-        const { articles, articlesCount } = await fetchArticles(currentPage)
-        if (articles && Array.isArray(articles)) {
-          setArticles(articles)
-          setTotal(articlesCount)
-        } else {
-          setError('No articles found or invalid data format')
-        }
+        const response = await fetchArticles(currentPage)
+        dispatch(setArticles(response))
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message)
@@ -42,11 +40,30 @@ const Articles = () => {
     }
 
     loadArticles()
-  }, [currentPage])
+  }, [currentPage, dispatch])
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage.toString())
   }, [currentPage])
+
+  const handleLikeClick = async (article: TArticle) => {
+    if (isAuthenticated) {
+      try {
+        if (article.favorited) {
+          const response = await deleteLike(article.slug)
+          if (response.article) {
+            dispatch(fetchUserLike(currentPage))
+          }
+        } else {
+          await postLike(article.slug)
+          dispatch(fetchUserLike(currentPage))
+        }
+        dispatch(setCurrentPage(currentPage))
+      } catch (err) {
+        setError('Invalid credentials')
+      }
+    }
+  }
 
   if (loading) return <Loading />
   if (error) return <ErrorComponent />
@@ -63,7 +80,12 @@ const Articles = () => {
                   <Link to={`/articles/${article.slug}`} key={article.slug} className={styles.title}>
                     {article.title}
                   </Link>
-                  <img className={styles.heart} src="/assets/img/heart.svg" alt="like" />
+                  <img
+                    className={styles.heart}
+                    src={article.favorited && isAuthenticated ? '/assets/img/heart-red.svg' : '/assets/img/heart.svg'}
+                    alt="like"
+                    onClick={() => handleLikeClick(article)}
+                  />
                   {article.favoritesCount !== 0 && <p className={styles.countLikes}>{article.favoritesCount}</p>}
                 </div>
                 {article.tagList && article.tagList.length > 0 && (
@@ -106,7 +128,7 @@ const Articles = () => {
           <div>No articles found</div>
         )}
       </section>
-      <PaginationComponent current={currentPage} total={total} onChange={(page) => setCurrentPage(page)} />
+      <PaginationComponent current={currentPage} total={total} onChange={(page) => dispatch(setCurrentPage(page))} />
     </>
   )
 }
