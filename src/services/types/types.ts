@@ -122,3 +122,7 @@ export type TPostArticle = {
 export type TPostArticleData = {
   article: TPostArticle
 }
+
+export type TPopConfirmProps = {
+  slug: string
+}
