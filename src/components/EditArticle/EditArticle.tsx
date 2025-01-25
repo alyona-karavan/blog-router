@@ -42,7 +42,7 @@ const EditArticle: FC = () => {
             tagList: data.tagList,
           }
           setCurrentArticle(articleData)
-          setTags(articleData.tagList)
+          setTags(articleData.tagList.length === 0 ? [''] : articleData.tagList)
         } else {
           setError('Article not found')
         }
