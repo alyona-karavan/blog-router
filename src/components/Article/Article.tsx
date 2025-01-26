@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 
 import Loading from '../Loading'
 import ErrorComponent from '../ErrorComponent'
+import PopConfirm from '../PopConfirm'
 import { fetchArticleBySlug } from '../../services/api/articles'
 import { TArticle, TUserData, TStateLikeSlice } from '../../services/types/types'
 import { postLike, deleteLike } from '../../services/api/like'
@@ -132,9 +133,7 @@ const Article = () => {
               currentArticle.author.image === user?.image ? (
                 // eslint-disable-next-line indent
                 <div className={styles.buttons}>
-                  <Link to="">
-                    <div className={`${styles.button} ${styles.delete}`}>Delete</div>
-                  </Link>
+                  <PopConfirm slug={currentArticle.slug} />
                   <Link to={`/articles/${slug}/edit`}>
                     <div className={`${styles.button} ${styles.edit}`}>Edit</div>
                   </Link>

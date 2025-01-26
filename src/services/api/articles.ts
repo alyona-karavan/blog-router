@@ -56,3 +56,14 @@ export const putArticle = async (slug: string, articleData: TArticlePut) => {
   })
   return response.data
 }
+
+export const deleteArticle = async (slug: string) => {
+  const token = localStorage.getItem('token')
+  const response = await axios.delete(`${API_URL}/articles/${slug}`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
+    },
+  })
+  return response.data
+}
